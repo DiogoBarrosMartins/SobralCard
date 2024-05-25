@@ -9,7 +9,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "@emotion/styled";
-const styledBox = styled(Box)``;
+
 
 
 // componente da barra do topo
@@ -26,45 +26,40 @@ const Topbar = () => {
     // não precisa de muito css, ou css complexo 
     return (
     <Box display = "flex" justifyContent="space-between" p={2}>
-        
-        
         {/*Search bar*/ }
-        <styledBox 
+        <Box 
             display = "flex" 
             backgroundColor={colors.primary[400]} 
             borderRadius="3px"   
             >
                 <InputBase sx={{ml:2, flex: 1}} placeholder="Search" />
-            <IconButton type="button" sx ={{p:1}}>
-                <SearchIcon></SearchIcon>
+                <IconButton type="button" sx={{ p:1 }}>
+                <SearchIcon/>
             </IconButton>
-            </styledBox>
+            </Box>
 
 {/**ICONS */}
 
         <Box display ="flex" >
 
             <IconButton onClick={colorMode.toggleColorMode}>
-                {theme.pallete.mode ==='dark' ?(
+                {theme.palette.mode === "dark" ?(
                     <DarkModeOutlinedIcon/>
                 ) : (
                     <LightModeOutlinedIcon/>
-                )
-            }
-             
+                )}
             </IconButton>
+
             <IconButton>
                 <NotificationsOutlinedIcon/>
             </IconButton>
+            
             <IconButton>
                 <SettingsOutlinedIcon/>  
             </IconButton>
-            
+           
             <IconButton>
-                
-            </IconButton>
-            <IconButton>
-                
+                <PersonOutlinedIcon/>
             </IconButton>
         </Box>
     </Box>
