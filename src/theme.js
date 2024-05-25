@@ -13,7 +13,7 @@ export const tokens = (mode) => ({
             600: "#525252",
             700: "#3d3d3d",
             800: "#292929",
-            900: "#141414"
+            900: "#141414",
         },
         primary: {
             100: "#d0d1d5",
@@ -24,7 +24,7 @@ export const tokens = (mode) => ({
             600: "#101624",
             700: "#0c101b",
             800: "#080b12",
-            900: "#040509"
+            900: "#040509",
         },
         greenAccent: {
             100: "#dbf5ee",
@@ -35,7 +35,7 @@ export const tokens = (mode) => ({
             600: "#3da58a",
             700: "#2e7c67",
             800: "#1e5245",
-            900: "#0f2922"
+            900: "#0f2922",
         },
         redAccent: {
             100: "#f8dcdb",
@@ -46,7 +46,7 @@ export const tokens = (mode) => ({
             600: "#af3f3b",
             700: "#832f2c",
             800: "#58201e",
-            900: "#2c100f"
+            900: "#2c100f",
         },
         blueAccent: {
             100: "#e1e2fe",
@@ -57,7 +57,7 @@ export const tokens = (mode) => ({
             600: "#535ac8",
             700: "#3e4396",
             800: "#2a2d64",
-            900: "#151632"
+            900: "#151632",
         },
             }
         : {
@@ -70,7 +70,7 @@ export const tokens = (mode) => ({
                 600: "#858585",
                 700: "#a3a3a3",
                 800: "#c2c2c2",
-                900: "#e0e0e0"
+                900: "#e0e0e0",
             },
             primary: {
                 100: "#040509",
@@ -81,7 +81,7 @@ export const tokens = (mode) => ({
                 600: "#1F2A40",
                 700: "#727681",
                 800: "#a1a4ab",
-                900: "#d0d1d5"
+                900: "#d0d1d5",
             },
             greenAccent: {
                 100: "#0f2922",
@@ -114,7 +114,7 @@ export const tokens = (mode) => ({
                 600: "#868dfb",
                 700: "#a4a9fc",
                 800: "#c3c6fd",
-                900: "#e1e2fe"
+                900: "#e1e2fe",
             },
         }),
 });
@@ -125,7 +125,7 @@ export const themeSettings = (mode) => {
   return {
     palette:{
       mode: mode,
-      ...colors(mode === "dark"
+      ...(mode === "dark"
         ? {
             // palette values for dark mode
             primary: {
