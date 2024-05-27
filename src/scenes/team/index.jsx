@@ -104,7 +104,7 @@ const Team = () => {
                     },
                     "& .MuiDataGrid-footerContainer": {
                     borderTop: "none",
-                    backgroundColor: colors.primary[500],
+                    backgroundColor: colors.blueAccent[700],
                     },
                    
                     "& .MuiBox-root": {
