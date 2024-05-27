@@ -22,6 +22,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
    const colors = tokens(theme.palette.mode);
    return (
       <MenuItem
+      // está activo quando o valor do selected é o title    
          active={selected === title}
          style={{
          color: colors.grey[100],
@@ -48,10 +49,10 @@ const Sidebar = () => {
    return (
       <Box
          sx={{
-            "& .pro-sidebar.inner": {
+            "& .pro-sidebar-inner": {
                background: `${colors.primary[400]} !important`,
             },
-            "& .pro-icon.wrapper" :{
+            "& .pro-icon-wrapper" :{
                backgroundColor: "transparent !important",
             },
             "& .pro-inner-item": {
@@ -60,7 +61,7 @@ const Sidebar = () => {
             "& .pro-inner-item:hover":{
                color:"#868dfb !important", 
             },
-            "& .pro-inner-item:active":{
+            "& .pro-menu-item.active":{
                color:"#6870fa !important", 
             },
       }}
