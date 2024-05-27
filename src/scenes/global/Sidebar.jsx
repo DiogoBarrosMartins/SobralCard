@@ -119,7 +119,7 @@ const Sidebar = () => {
                         variant="h5" 
                         color={colors.blueAccent[500]}
                      >
-                        Apprentice
+                        hehe
                      </Typography>
                   </Box>
                </Box>
