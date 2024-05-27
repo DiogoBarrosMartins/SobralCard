@@ -89,10 +89,11 @@ const Team = () => {
                     "& .name-column--cell": {
                     color: colors.greenAccent[300],
                     },
-                    "& MuiDataGrid-topContainer": {
-                    backgroundColor: colors.blueAccent[200],
-                    borderBottom: "none",
-                    },
+                  
+                    "& .MuiDataGrid-virtualScroller": {
+                        backgroundColor: colors.primary[400],
+                        }, 
+                 
                     "& MuiDataGrid-columnHeader": {
                         backgroundColor: colors.blueAccent[200],
                         borderBottom: "none",
@@ -101,16 +102,11 @@ const Team = () => {
                         backgroundColor: colors.blueAccent[200],
                         borderBottom: "none",
                     },
-                    "& .MuiDataGrid-virtualScroller": {
-                    backgroundColor: colors.primary[400],
-                    },
                     "& .MuiDataGrid-footerContainer": {
                     borderTop: "none",
-                    backgroundColor: colors.blueAccent[700],
+                    backgroundColor: colors.primary[500],
                     },
-                    "& .MuiCheckbox-root": {
-                    color: `${colors.greenAccent[200]} !important`
-                    },
+                   
                     "& .MuiBox-root": {
                         margin: "0 auto"
                     }
