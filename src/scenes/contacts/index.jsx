@@ -52,7 +52,6 @@ const Contacts = () => {
             flex:1,
         },
     ];
-
     return (
         <Box m="20px">
             <Header title="CONTACTS" subtitle="List of contacts" />
@@ -72,11 +71,9 @@ const Contacts = () => {
                     "& .name-column--cell": {
                         color: colors.greenAccent[300],
                     },
-                  
                     "& .MuiDataGrid-virtualScroller": {
                         backgroundColor: colors.primary[400],
                         }, 
-                 
                     "& MuiDataGrid-columnHeader": {
                         backgroundColor: colors.blueAccent[200],
                         borderBottom: "none",
@@ -88,14 +85,11 @@ const Contacts = () => {
                     "& .MuiDataGrid-footerContainer": {
                         borderTop: "none",
                         backgroundColor: colors.blueAccent[700],
-                    },
-                   
+                    },   
                     "& .MuiBox-root": {
                         margin: "0 auto"
                     },
-         
-                }}
-            >
+                }}>
                 <DataGrid checkboxSelection 
                     rows={mockDataContacts}
                     columns={columns}

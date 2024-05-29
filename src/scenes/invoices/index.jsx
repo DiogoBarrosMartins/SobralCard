@@ -52,22 +52,20 @@ const Invoices = () => {
                 height="75vh"
                 sx={{
                     "& .MuiDataGrid-root": {
-                    border: "none",
+                        border: "none",
                     },
                     "& .MuiDataGrid-cell": {
-                    borderBottom: "none",
-                    display:"flex",
-                    justifyContent:"center",
-                    alignItems:"center",
+                        borderBottom: "none",
+                        display:"flex",
+                        justifyContent:"center",
+                        alignItems:"center",
                     },
                     "& .name-column--cell": {
-                    color: colors.greenAccent[300],
+                        color: colors.greenAccent[300],
                     },
-                  
                     "& .MuiDataGrid-virtualScroller": {
                         backgroundColor: colors.primary[400],
                         }, 
-                 
                     "& MuiDataGrid-columnHeader": {
                         backgroundColor: colors.blueAccent[200],
                         borderBottom: "none",
@@ -77,21 +75,17 @@ const Invoices = () => {
                         borderBottom: "none",
                     },
                     "& .MuiDataGrid-footerContainer": {
-                    borderTop: "none",
-                    backgroundColor: colors.blueAccent[700],
+                        borderTop: "none",
+                        backgroundColor: colors.blueAccent[700],
                     },
-                   
                     "& .MuiBox-root": {
                         margin: "0 auto"
                     },
-           
-                }}
-            >
+                }}>
                 <DataGrid 
                 checkboxSelection 
                 rows={mockDataInvoices}
                 columns={columns}
-
                 />
             </Box>
         </Box>
