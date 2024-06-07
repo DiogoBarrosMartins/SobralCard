@@ -4,7 +4,7 @@ import Card from '../../components/Card';
 import { getCardDetailsByName } from "../../services/card-service";
 
 const CardScene = () => {
-  const [searchInput, setSearchInput] = useState('Cosmic Epiphany'); // Update default search input
+  const [searchInput] = useState('Cosmic Epiphany'); // Update default search input
   const [card, setCard] = useState(null);
   const [error, setError] = useState(null);
 
