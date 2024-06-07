@@ -8,6 +8,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -16,6 +17,11 @@ const Topbar = () => {
     const handlePersonClick = () => {
         window.location.href = "https://diogobmartins.netlify.app/";
     };
+    const navigate = useNavigate();
+    const handleGearsClick = () => {
+        navigate('/card-list');
+    };
+
     // vou buscar o tema ao react 
     const theme = useTheme();
     // vou buscar as colors aos tokens que passo no theme.js
@@ -72,7 +78,7 @@ const Topbar = () => {
                 <NotificationsOutlinedIcon/>
             </IconButton>
             
-            <IconButton>
+            <IconButton onClick={handleGearsClick}>
                 <SettingsOutlinedIcon/>  
             </IconButton>
            

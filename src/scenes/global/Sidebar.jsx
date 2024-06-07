@@ -16,6 +16,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+import SellIcon from '@mui/icons-material/Sell';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
    const theme = useTheme();
@@ -150,6 +152,21 @@ const Sidebar = () => {
                >
                   Data
                </Typography>
+               <Item
+                  title="Search Cards"
+                  to="/card-list"
+                  icon={<ViewCarouselIcon/>}
+                  selected={selected}
+                  setSelected={setSelected}
+               /> 
+
+<Item
+                  title="Search a Card"
+                  to="/card"
+                  icon={<SellIcon/>}
+                  selected={selected}
+                  setSelected={setSelected}
+               /> 
                <Item
                   title="Manage Team"
                   to="/team"
