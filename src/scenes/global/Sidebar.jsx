@@ -49,6 +49,10 @@ const Sidebar = () => {
    return (
       <Box
          sx={{
+          
+            position: 'sticky',
+            top: 0,
+            
             "& .pro-sidebar-inner": {
                background: `${colors.primary[400]} !important`,
             },
@@ -64,6 +68,11 @@ const Sidebar = () => {
             "& .pro-menu-item.active":{
                color:"#6870fa !important", 
             },
+            "& .pro-sideboard-layout":{
+               height:"100%", 
+               position:"sticky"
+              
+            },
       }}
       >
          <ProSidebar collapsed={isCollapsed}>
@@ -78,11 +87,12 @@ const Sidebar = () => {
                }}
                >
                   {!isCollapsed && (
-                     <Box display="flex"
-                     justifyContent="space-between"
-                     alignItems="center"
-                     ml="15px"
-                     >
+                      <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                ml="15px"
+              >
                         <Typography variant="h3" color={colors.grey[100]}>
                            Work
                         </Typography>
@@ -92,8 +102,7 @@ const Sidebar = () => {
                         </Box>
                      )}
                </MenuItem>
-
-               {/* USER */}
+            
                {!isCollapsed && (
                   <Box mb="25px">
                      <Box display ="flex" justifyContent="center" alignItems="center">
