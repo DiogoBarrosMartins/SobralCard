@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Typography, Button } from '@mui/material';
 
@@ -5,6 +6,7 @@ const Card = ({ card }) => {
   return (
     <div>
       <Typography variant="h4">{card.name}</Typography>
+      {card.card && <img src={card.card} alt={card.name} style={{ maxWidth: '100%', borderRadius: "25px" }} />}
       <Typography variant="body1">Type: {card.type_line}</Typography>
       <Typography variant="body1">Rarity: {card.rarity}</Typography>
       {card.prices && (
@@ -18,4 +20,3 @@ const Card = ({ card }) => {
 };
 
 export default Card;
-
