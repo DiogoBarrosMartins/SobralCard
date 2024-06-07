@@ -14,8 +14,7 @@ import Calendar from "./scenes/calendar";
 import Pie from "./scenes/pie";
 import Faq from "./scenes/faq";
 import Line from "./scenes/line";
-
-// import Geography from ".*scenes/geography";
+import Geography from "./scenes/geography";
 
 /**
  * O ColorModeContext.Provider  vai dar-me um provider de valor:{colorMode}
@@ -51,7 +50,7 @@ function App() {
               <Route path ="/bar" element ={<Bar/>} /> 
               <Route path ="/pie" element ={<Pie/>} /> 
               <Route path ="/line" element ={<Line/>} /> 
-              {/* <Route path ="/geography" element ={<Geography/>} /> */}
+              <Route path ="/geography" element ={<Geography/>} /> 
             </Routes>
         </main>
       </div>
