@@ -98,10 +98,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Books
+                  BooksFM
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                 Tap for mana
+                O Boomer Rock do Magic
                 </Typography>
               </Box>
             </Box>
