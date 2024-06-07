@@ -4,7 +4,7 @@ import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
+
 import Team from "./scenes/team";
 import Invoices from "./scenes/invoices";
 import Contacts from "./scenes/contacts";
@@ -15,7 +15,8 @@ import Pie from "./scenes/pie";
 import Faq from "./scenes/faq";
 import Line from "./scenes/line";
 import Geography from "./scenes/geography";
-
+import CardListPage from "./scenes/cardlistpage";
+import CardScene from "./scenes/cardscene";
 /**
  * O ColorModeContext.Provider  vai dar-me um provider de valor:{colorMode}
  * utilizo-o para me dar o contexto do modo da cor do site. Faço o mesmo com 
@@ -40,7 +41,7 @@ function App() {
         <main className="content">
           <Topbar setIsSidebar={setIsSidebar}/>
             <Routes>
-              <Route path ="/" element ={<Dashboard/>} />
+              <Route path ="/" element ={<CardListPage/>} />
               <Route path ="/team" element ={<Team/>} /> 
               <Route path ="/contacts" element ={<Contacts/>} /> 
               <Route path ="/invoices" element ={<Invoices/>} /> 
@@ -51,6 +52,10 @@ function App() {
               <Route path ="/pie" element ={<Pie/>} /> 
               <Route path ="/line" element ={<Line/>} /> 
               <Route path ="/geography" element ={<Geography/>} /> 
+
+              <Route path="/card-list" element={<CardListPage />} />
+      
+              <Route path="/card" element={<CardScene />} />
             </Routes>
         </main>
       </div>
