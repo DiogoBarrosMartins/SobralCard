@@ -10,25 +10,26 @@ const GeographyChart = ({ isDashboard = false }) => {
     return (
       <ResponsiveChoropleth
         data={data}
+        
         theme={{
           axis: {
             domain: {
               line: {
-                stroke: colors.grey[100]
+                stroke: colors.grey[100],
               },
             },
             legend: {
               text: {
-                fill: colors.grey[100]
+                fill: colors.grey[100],
               },
             },
             ticks: {
               line: {
                 stroke: colors.grey[100],
-                strokeWidth: 1
+                strokeWidth: 1,
               },
               text: {
-                fill: colors.grey[100]
+                fill: colors.grey[100],
               },
             },
           },

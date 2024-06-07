@@ -16,7 +16,7 @@ import Faq from "./scenes/faq";
 import Line from "./scenes/line";
 import Geography from "./scenes/geography";
 import CardListPage from "./scenes/cardlistpage";
-import Card from "./scenes/card";
+import CardScene from "./scenes/cardscene";
 /**
  * O ColorModeContext.Provider  vai dar-me um provider de valor:{colorMode}
  * utilizo-o para me dar o contexto do modo da cor do site. Faço o mesmo com 
@@ -54,7 +54,8 @@ function App() {
               <Route path ="/geography" element ={<Geography/>} /> 
 
               <Route path="/card-list" element={<CardListPage />} />
-              <Route path="/card" element={<Card />} />
+      
+              <Route path="/card" element={<CardScene />} />
             </Routes>
         </main>
       </div>
