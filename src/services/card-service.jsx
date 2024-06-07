@@ -52,10 +52,8 @@ export async function getCardDetailsByName(searchInput) {
 
         const firstMatch = data.data[0];
 
-        // Fetching additional details including the price in euros
-        const priceResponse = await axios.get(`${API_BASE_URL}/${firstMatch.id}/prices`);
-        const prices = priceResponse.data.prices;
-        const priceInEuros = prices.eur;
+        // Extracting prices in euros if available
+        const pricesInEuros = firstMatch.prices ? firstMatch.prices.eur : null;
 
         return {
             name: firstMatch.name,
@@ -65,7 +63,7 @@ export async function getCardDetailsByName(searchInput) {
                 : firstMatch.card_faces[0].image_uris.normal,
             flavour: firstMatch.flavor_text,
             art: firstMatch.image_uris ? firstMatch.image_uris.art_crop : undefined,
-            priceInEuros: priceInEuros, // Adding the price in euros to the returned object
+            prices: pricesInEuros // Add prices in euros to the returned object
         };
     } catch (error) {
         console.error("Error fetching card details:", error);

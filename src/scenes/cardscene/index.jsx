@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import Card from '../../components/Card';
-import { getCardDetailsByName } from '../../services/card-service';
+import { getCardDetailsByName } from "../../services/card-service";
 
 const CardScene = () => {
-  const { id } = useParams();
-  const [searchInput, setSearchInput] = useState('Cosmic Epiphany');
+  const [searchInput, setSearchInput] = useState('Cosmic Epiphany'); // Update default search input
   const [card, setCard] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCard = async () => {
@@ -14,31 +14,18 @@ const CardScene = () => {
         const fetchedCard = await getCardDetailsByName(searchInput);
         setCard(fetchedCard);
       } catch (error) {
-        console.error("Error fetching card:", error);
+        setError(error.message);
       }
     };
     fetchCard();
   }, [searchInput]);
 
-  const handleSearchInputChange = (event) => {
-    setSearchInput(event.target.value);
-  };
-
   return (
-    <div>
-      <h1>Card Details</h1>
-      <input
-        type="text"
-        value={searchInput}
-        onChange={handleSearchInputChange}
-      />
-      {card && (
-        <Card card={card} />
-      )}
-    </div>
+    <Box m="20px">
+      {error && <div>Error: {error}</div>}
+      {card && <Card card={card} />}
+    </Box>
   );
 };
 
 export default CardScene;
-
-
