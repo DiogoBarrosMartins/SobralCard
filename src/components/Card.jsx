@@ -11,9 +11,7 @@ const Card = ({ card }) => {
       {card.prices && (
         <Typography variant="body1">Price (Euros): {card.prices}</Typography>
       )}
-      <Button variant="contained" color="primary" onClick={() => {}}>
-        Add to Favorites
-      </Button>
+     
     </div>
   );
 };
