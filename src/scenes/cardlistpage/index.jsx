@@ -1,35 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import CardListDisplay from '../../components/CardListDisplay';
-import { getCardsByString } from '../../services/card-service';
 
 const CardListPage = () => {
     const [searchInput, setSearchInput] = useState('dragon');
-    const [cards, setCards] = useState([]);
-
-    useEffect(() => {
-        async function fetchCards() {
-            try {
-                const fetchedCards = await getCardsByString(searchInput);
-                setCards(fetchedCards);
-            } catch (error) {
-                console.error("Error fetching cards:", error);
-            }
-        }
-        fetchCards();
-    }, [searchInput]);
 
     const handleSearchChange = (e) => {
         setSearchInput(e.target.value);
-    };
-
-    const handleSearchClick = async () => {
-        try {
-            const fetchedCards = await getCardsByString(searchInput);
-            setCards(fetchedCards);
-        } catch (error) {
-            console.error("Error fetching cards:", error);
-        }
     };
 
     return (
@@ -45,14 +22,13 @@ const CardListPage = () => {
                     onChange={handleSearchChange}
                     sx={{ mr: 2 }}
                 />
-                <Button variant="contained" color="primary" onClick={handleSearchClick}>
+                <Button variant="contained" color="primary" onClick={() => {}}>
                     Search
                 </Button>
             </Box>
-            <CardListDisplay searchInput={searchInput} cards={cards} />
+            <CardListDisplay searchInput={searchInput} />
         </Box>
     );
 };
 
 export default CardListPage;
-
