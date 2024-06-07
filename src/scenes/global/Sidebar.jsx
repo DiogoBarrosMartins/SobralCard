@@ -6,7 +6,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
-
+import AddIcon from '@mui/icons-material/Add';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -108,6 +108,8 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          
+          
           <Item
                   title="Search Cards"
                   to="/"
@@ -115,7 +117,13 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                /> 
-
+<Item
+                  title="Your Lists"
+                  to="/deck"
+                  icon={<AddIcon/>}
+                  selected={selected}
+                  setSelected={setSelected}
+               /> 
             <Typography
               variant="h6"
               color={colors.grey[300]}

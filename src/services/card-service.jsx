@@ -39,6 +39,7 @@ export async function getRandomCard(callbackFunction) {
     }
 }
 
+
 export async function getCardDetailsByName(searchInput) {
     try {
         const response = await axios.get(`${API_BASE_URL}/search`, {
@@ -50,19 +51,23 @@ export async function getCardDetailsByName(searchInput) {
             throw new Error("No cards found");
         }
 
-        const firstMatch = data.data[0];
+        // Check if there's a card without the "A-" prefix
+        const nonAPrefixedCard = data.data.find(card => !card.name.startsWith("A-"));
+
+        // If there's a non-"A-" version of the card, use it; otherwise, use the first match
+        const selectedCard = nonAPrefixedCard || data.data[0];
 
         // Extracting prices in euros if available
-        const pricesInEuros = firstMatch.prices ? firstMatch.prices.eur : null;
+        const pricesInEuros = selectedCard.prices ? selectedCard.prices.eur : null;
 
         return {
-            name: firstMatch.name,
-            id: firstMatch.id,
-            card: firstMatch.image_uris
-                ? firstMatch.image_uris.normal
-                : firstMatch.card_faces[0].image_uris.normal,
-            flavour: firstMatch.flavor_text,
-            art: firstMatch.image_uris ? firstMatch.image_uris.art_crop : undefined,
+            name: selectedCard.name,
+            id: selectedCard.id,
+            card: selectedCard.image_uris
+                ? selectedCard.image_uris.normal
+                : selectedCard.card_faces[0].image_uris.normal,
+            flavour: selectedCard.flavor_text,
+            art: selectedCard.image_uris ? selectedCard.image_uris.art_crop : undefined,
             prices: pricesInEuros // Add prices in euros to the returned object
         };
     } catch (error) {
@@ -70,6 +75,7 @@ export async function getCardDetailsByName(searchInput) {
         throw error;
     }
 }
+
 
 export async function getCardsByString(searchInput) {
     try {

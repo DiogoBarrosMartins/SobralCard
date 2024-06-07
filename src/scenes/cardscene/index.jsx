@@ -7,7 +7,13 @@ import { useLocation } from 'react-router-dom';
 const CardScene = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const searchInputFromURL = searchParams.get('name') || 'Cosmic Epiphany'; 
+    let searchInputFromURL = searchParams.get('name') || 'Cosmic Epiphany'; 
+
+    // Check if the search input starts with "A-"
+    if (searchInputFromURL.startsWith("A-")) {
+        // Remove the "A-" prefix
+        searchInputFromURL = searchInputFromURL.substring(2);
+    }
 
     const [searchInput, setSearchInput] = useState(searchInputFromURL);
     const [card, setCard] = useState(null);
