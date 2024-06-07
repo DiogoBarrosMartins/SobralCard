@@ -8,14 +8,14 @@ import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
 import Invoices from "./scenes/invoices";
 import Contacts from "./scenes/contacts";
-// import Bar from "./scenes/dashboard";
+import Bar from "./scenes/bar";
 import Form from "./scenes/form";
-// import Line from "./scenes/line";
-// import Pie from "./scenes/pie";
-// import Form from "./scenes/form";
-import Faq from "./scenes/faq";
-// import Geography from ".*scenes/geography";
 import Calendar from "./scenes/calendar";
+import Pie from "./scenes/pie";
+import Faq from "./scenes/faq";
+import Line from "./scenes/line";
+
+// import Geography from ".*scenes/geography";
 
 /**
  * O ColorModeContext.Provider  vai dar-me um provider de valor:{colorMode}
@@ -48,9 +48,9 @@ function App() {
               <Route path ="/form" element ={<Form/>} /> 
               <Route path ="/faq" element ={<Faq/>} /> 
               <Route path ="/calendar" element ={<Calendar/>} />
-              {/* <Route path ="/bar" element ={<Dashboard/>} /> */}
-              {/* <Route path ="/pie" element ={<Dashboard/>} /> */}
-              {/* <Route path ="/line" element ={<Dashboard/>} /> */}
+              <Route path ="/bar" element ={<Bar/>} /> 
+              <Route path ="/pie" element ={<Pie/>} /> 
+              <Route path ="/line" element ={<Line/>} /> 
               {/* <Route path ="/geography" element ={<Geography/>} /> */}
             </Routes>
         </main>

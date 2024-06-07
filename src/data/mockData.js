@@ -399,32 +399,32 @@ export const mockBarData = [
 
 export const mockPieData = [
   {
-    id: "hack",
-    label: "hack",
+    id: "mono-red aggro",
+    label: "mono-red aggro",
     value: 239,
     color: "hsl(104, 70%, 50%)",
   },
   {
-    id: "make",
-    label: "make",
+    id: "azorius control decks",
+    label: "azorius control decks",
     value: 170,
     color: "hsl(162, 70%, 50%)",
   },
   {
-    id: "go",
-    label: "go",
+    id: "combo decks",
+    label: "combo decks",
     value: 322,
     color: "hsl(291, 70%, 50%)",
   },
   {
-    id: "lisp",
-    label: "lisp",
+    id: "midrange madness",
+    label: "midrange madness",
     value: 503,
     color: "hsl(229, 70%, 50%)",
   },
   {
-    id: "scala",
-    label: "scala",
+    id: "dinosaur ramp deck",
+    label: "dinosaur ramp deck",
     value: 584,
     color: "hsl(344, 70%, 50%)",
   },
