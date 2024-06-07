@@ -1,4 +1,3 @@
-// CardListDisplay.jsx
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Card, CardMedia, Link } from '@mui/material';

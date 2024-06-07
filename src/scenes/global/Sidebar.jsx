@@ -6,7 +6,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
-import SellIcon from '@mui/icons-material/Sell';
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -121,16 +121,10 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+         
             </Typography>
            
-            <Item
-                  title="Search a Card"
-                  to="/card"
-                  icon={<SellIcon/>}
-                  selected={selected}
-                  setSelected={setSelected}
-               /> 
+            
           
           </Box>
         </Menu>

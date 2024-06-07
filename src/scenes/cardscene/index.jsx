@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 const CardScene = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const searchInputFromURL = searchParams.get('name') || 'Cosmic Epiphany'; // Default to 'Cosmic Epiphany' if no name is provided
+    const searchInputFromURL = searchParams.get('name') || 'Cosmic Epiphany'; 
 
     const [searchInput, setSearchInput] = useState(searchInputFromURL);
     const [card, setCard] = useState(null);
