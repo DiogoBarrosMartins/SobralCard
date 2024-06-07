@@ -1,33 +1,28 @@
 import {Box, IconButton, useTheme} from "@mui/material";
-import {useContext, useState} from "react";
-import { ColorModeContext, tokens } from "../../theme";
+import { useState} from "react";
+import {  tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate } from 'react-router-dom';
 
 
 
 // componente da barra do topo
 const Topbar = () => {
-    const handlePersonClick = () => {
-        window.location.href = "https://diogobmartins.netlify.app/";
-    };
-    const navigate = useNavigate();
-    const handleGearsClick = () => {
-        navigate('/card-list');
-    };
+    //const handlePersonClick = () => {
+    //    window.location.href = "https://diogobmartins.netlify.app/";
+    //};
+  //  const navigate = useNavigate();
+   // const handleGearsClick = () => {
+    //    navigate('/card-list');
+  //  };
 
     // vou buscar o tema ao react 
     const theme = useTheme();
     // vou buscar as colors aos tokens que passo no theme.js
     const colors = tokens(theme.palette.mode);
     // aqui vou buscar o context ao react, o contexto passo na app
-    const colorMode = useContext(ColorModeContext);
+  //  const colorMode = useContext(ColorModeContext);
     const [searchQuery, setSearchQuery] = useState("");
     // isto facilita-me a não ter de ter outro ficheiro, porque este componente 
     // não precisa de muito css, ou css complexo 
@@ -51,7 +46,7 @@ const Topbar = () => {
             >
                 <InputBase
                     sx={{ ml: 2, flex: 1 }}
-                    placeholder="Search"
+                    placeholder="Search a rule"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     name="q" // This name attribute is important for Google to recognize the query parameter
@@ -66,25 +61,15 @@ const Topbar = () => {
 
         <Box display ="flex" >
 
-            <IconButton onClick={colorMode.toggleColorMode}>
-                {theme.palette.mode === "dark" ?(
-                    <DarkModeOutlinedIcon/>
-                ) : (
-                    <LightModeOutlinedIcon/>
-                )}
-            </IconButton>
+            
 
             <IconButton>
                 <NotificationsOutlinedIcon/>
             </IconButton>
             
-            <IconButton onClick={handleGearsClick}>
-                <SettingsOutlinedIcon/>  
-            </IconButton>
            
-            <IconButton  onClick={handlePersonClick}>
-                <PersonOutlinedIcon/>
-            </IconButton>
+           
+            
         </Box>
     </Box>
     );
