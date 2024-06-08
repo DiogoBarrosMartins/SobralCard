@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button } from '@mui/material';
 import CardListDisplay from '../../components/CardListDisplay';
 
 const CardListPage = () => {
-    const [searchInput, setSearchInput] = useState('dragon');
+    const [searchInput, setSearchInput] = useState('shop');
 
     const handleSearchChange = (e) => {
         setSearchInput(e.target.value);

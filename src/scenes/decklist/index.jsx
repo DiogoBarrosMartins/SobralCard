@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography, useTheme } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Header from "../../components/Header";
 import { fetchRandomCardImage, getCardsByString } from "../../services/card-service"; // Import getCardsByString
-import { tokens } from "../../theme";
+
 
 const DeckList = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+  
+  
     const [storedLists, setStoredLists] = useState([]);
     const [randomCardImage, setRandomCardImage] = useState('');
 
@@ -56,8 +56,8 @@ const DeckList = () => {
     };
 
     return (
-        <Box height="80vh" width="100%" display="flex" flexDirection="column">
-            <Header title="My Lists" subtitle="Your Lists" />
+        <Box m="20px" height="80vh" width="100%-20px" display="flex" flexDirection="column">
+            <Header title="My Lists" subtitle="Your Lists"  />
 
             <Box flex="1" display="flex" flexDirection="row" justifyContent="center">
                 <Box mx="10px" flex="1" display="flex" alignItems="stretch">
