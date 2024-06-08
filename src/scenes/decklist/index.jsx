@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import Header from "../../components/Header";
-import { fetchRandomCardImage } from "../../services/card-service";
+import { fetchRandomCardImage, getCardsByString } from "../../services/card-service"; // Import getCardsByString
+import { tokens } from "../../theme";
 
 const DeckList = () => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const [storedLists, setStoredLists] = useState([]);
     const [randomCardImage, setRandomCardImage] = useState('');
 
@@ -19,7 +22,6 @@ const DeckList = () => {
             try {
                 const card = await fetchRandomCardImage();
                 console.log("Card fetched:", card);
-                // Assuming the card object has a property 'card' for the image URL
                 setRandomCardImage(card.card);
             } catch (error) {
                 console.error("Error fetching card:", error);
@@ -28,12 +30,21 @@ const DeckList = () => {
         fetchImage();
     }, []);
 
-    const handleAddNewList = () => {
+    const handleAddNewList = async () => {
         const newListName = prompt('Enter the name of the new list:');
         if (newListName && newListName.trim() !== '') {
-            const updatedLists = [...storedLists, { name: newListName }];
-            localStorage.setItem('storedLists', JSON.stringify(updatedLists));
-            setStoredLists(updatedLists);
+            try {
+                const cards = await getCardsByString(newListName); // Fetch cards by search input
+                if (cards.length > 0) {
+                    const updatedLists = [...storedLists, { name: newListName, backgroundImage: cards[0].card }]; // Update background image
+                    localStorage.setItem('storedLists', JSON.stringify(updatedLists));
+                    setStoredLists(updatedLists);
+                } else {
+                    console.error("No cards found for the search input:", newListName);
+                }
+            } catch (error) {
+                console.error("Error adding new list:", error);
+            }
         }
     };
 
@@ -53,13 +64,38 @@ const DeckList = () => {
                     <Button
                         onClick={handleAddNewList}
                         style={{
-                            backgroundImage: `url(${randomCardImage})`,
-                            backgroundSize: 'cover',
+                            position: 'relative',
                             flex: '1',
-                            backgroundPosition: '30% top' // Set background position to 30% from the top
+                            overflow: 'hidden',
                         }}
                     >
-                        Add New List
+                        <Box
+                            style={{
+                                backgroundImage: `url(${randomCardImage})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                width: '100%',
+                                height: '100%',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                            }}
+                        ></Box>
+                        <Typography
+                            variant="body1"
+                            style={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                backgroundColor: 'black',
+                                color: 'white',
+                                padding: '8px',
+                                borderRadius: '5px',
+                            }}
+                        >
+                            Add New List
+                        </Typography>
                     </Button>
                 </Box>
 
@@ -71,8 +107,39 @@ const DeckList = () => {
                             onClick={() => handleListButtonClick(index)}
                             fullWidth
                             sx={{ height: "100%", minHeight: "64px" }}
+                            style={{
+                                position: 'relative',
+                                flex: '1',
+                                overflow: 'hidden',
+                            }}
                         >
-                            {list.name}
+                            <Box
+                                style={{
+                                    backgroundImage: `url(${list.backgroundImage})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    width: '100%',
+                                    height: '100%',
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                }}
+                            ></Box>
+                            <Typography
+                                variant="body1"
+                                style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    padding: '8px',
+                                    borderRadius: '5px',
+                                }}
+                            >
+                                {list.name}
+                            </Typography>
                         </Button>
                     </Box>
                 ))}
@@ -82,4 +149,3 @@ const DeckList = () => {
 };
 
 export default DeckList;
-
