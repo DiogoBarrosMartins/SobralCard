@@ -39,7 +39,6 @@ export async function getRandomCard(callbackFunction) {
     }
 }
 
-
 export async function getCardDetailsByName(searchInput) {
     try {
         const response = await axios.get(`${API_BASE_URL}/search`, {
@@ -75,6 +74,7 @@ export async function getCardDetailsByName(searchInput) {
         throw error;
     }
 }
+
 
 
 export async function getCardsByString(searchInput) {
