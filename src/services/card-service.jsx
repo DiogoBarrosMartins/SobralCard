@@ -2,39 +2,35 @@ import axios from 'axios';
 const API_BASE_URL = 'https://api.scryfall.com/';
 
 
-
 export async function getCardDetailsByName(searchInput) {
     try {
-        const response = await axios.get(`${API_BASE_URL}/search`, {
-            params: { q: searchInput }
+        const response = await axios.get(`${API_BASE_URL}/cards/named`, {
+            params: { exact: searchInput }
         });
         const data = response.data;
 
-        if (!data.data || data.data.length === 0) {
-            throw new Error("No cards found");
+        if (!data) {
+            throw new Error("No card found");
         }
 
-        // Check if there's a card without the "A-" prefix
-        const nonAPrefixedCard = data.data.find(card => !card.name.startsWith("A-"));
-
-        // If there's a non-"A-" version of the card, use it; otherwise, use the first match
-        const selectedCard = nonAPrefixedCard || data.data[0];
-
-        // Extracting prices in euros if available
-        const pricesInEuros = selectedCard.prices ? selectedCard.prices.eur : null;
+        const pricesInEuros = data.prices ? data.prices.eur : null;
 
         return {
-            name: selectedCard.name,
-            id: selectedCard.id,
-            card: selectedCard.image_uris
-                ? selectedCard.image_uris.normal
-                : selectedCard.card_faces[0].image_uris.normal,
-            flavour: selectedCard.flavor_text,
-            art: selectedCard.image_uris ? selectedCard.image_uris.art_crop : undefined,
-            prices: pricesInEuros // Add prices in euros to the returned object
+            name: data.name,
+            id: data.id,
+            card: data.image_uris
+                ? data.image_uris.normal
+                : data.card_faces[0].image_uris.normal,
+            flavour: data.flavor_text,
+            art: data.image_uris ? data.image_uris.art_crop : undefined,
+            prices: pricesInEuros
         };
     } catch (error) {
-        console.error("Error fetching card details:", error);
+        if (error.response && error.response.status === 404) {
+            console.error("Card not found:", error.message);
+        } else {
+            console.error("Error fetching card details:", error);
+        }
         throw error;
     }
 }

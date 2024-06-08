@@ -20,6 +20,7 @@ const CardListDisplay = ({ searchInput }) => {
             setCards(fetchedCards);
         } catch (error) {
             console.error('Error fetching cards:', error);
+            setCards([]); // Set to empty array on error
         }
     };
 

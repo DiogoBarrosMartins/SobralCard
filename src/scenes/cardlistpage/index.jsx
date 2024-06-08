@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button } from '@mui/material';
+import { Box, Typography, TextField } from '@mui/material';
 import CardListDisplay from '../../components/CardListDisplay';
 
 const CardListPage = () => {
@@ -22,9 +22,6 @@ const CardListPage = () => {
                     onChange={handleSearchChange}
                     sx={{ mr: 2 }}
                 />
-                <Button variant="contained" color="primary" onClick={() => {}}>
-                    Search
-                </Button>
             </Box>
             <CardListDisplay searchInput={searchInput} />
         </Box>
