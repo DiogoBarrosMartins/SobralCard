@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import Header from "../../components/Header";
 
 const DeckList = () => {
-  const [selectedCards, setSelectedCards] = useState([]);
   const [storedLists, setStoredLists] = useState([]);
 
   useEffect(() => {
@@ -14,36 +14,51 @@ const DeckList = () => {
 
   const handleAddNewList = () => {
     const newListName = prompt('Enter the name of the new list:');
-    if (newListName !== null && newListName.trim() !== '') {
-      const updatedLists = [...storedLists, { name: newListName, cards: [] }];
+    if (newListName && newListName.trim() !== '') {
+      const updatedLists = [...storedLists, { name: newListName }];
       localStorage.setItem('storedLists', JSON.stringify(updatedLists));
       setStoredLists(updatedLists);
     }
   };
 
-  const handleListButtonClick = (listName) => {
-    const selectedList = storedLists.find((list) => list.name === listName);
-    const updatedList = { ...selectedList, cards: [...selectedList.cards, ...selectedCards] };
-
-    const updatedLists = storedLists.map((list) => (list.name === listName ? updatedList : list));
+  const handleListButtonClick = (index) => {
+    const updatedLists = [...storedLists];
+    updatedLists.splice(index, 1);
     localStorage.setItem('storedLists', JSON.stringify(updatedLists));
     setStoredLists(updatedLists);
-    setSelectedCards([]);
   };
 
   return (
-    <Box m="20px">
-      <Typography variant="h4" mb="20px">
-        My Decks
-      </Typography>
-      <Button variant="contained" color="primary" onClick={handleAddNewList}>
-        Add New List
-      </Button>
-      {storedLists.map((list, index) => (
-        <Button key={index} variant="contained" color="primary" onClick={() => handleListButtonClick(list.name)}>
-          {list.name}
-        </Button>
-      ))}
+    <Box height="80vh" width="100%" display="flex" flexDirection="column">
+      <Header title="My Lists" subtitle="Your Lists" />
+      <Box flex="1" display="flex" flexDirection="row" justifyContent="center">
+        {/* Render stored lists */}
+        {storedLists.map((list, index) => (
+          <Box key={index} mx="10px" flex="1" height="80vh">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleListButtonClick(index)}
+              fullWidth
+              sx={{ height: "100%", minHeight: "64px" }} // Set a minimum height for the button
+            >
+              {list.name}
+            </Button>
+          </Box>
+        ))}
+        {/* Button to add new list */}
+        <Box mx="10px" flex="1" height="80vh">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddNewList}
+            fullWidth
+            sx={{ height: "100%", minHeight: "64px" }} // Set a minimum height for the button
+          >
+            Add List
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 };

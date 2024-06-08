@@ -1,29 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
-
 html,
 body, 
 #root,
-.app,
-.content{
+.app {
   height: 100%;
   width: 100%;
- font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
 }
 
-.app{
+.content {
+  flex: 1; 
+  overflow-y: auto; /* Add scrollbar only if content overflows vertically */
+}
+
+.app {
   display: flex;
   position: relative;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 10px;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background: #e0e0e0;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: #888;
 }
 
