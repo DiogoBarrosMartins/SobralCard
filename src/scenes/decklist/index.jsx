@@ -69,11 +69,11 @@ const DeckList = () => {
                             overflow: 'hidden',
                         }}
                     >
-                        <Box
+                       <Box
                             style={{
                                 backgroundImage: `url(${randomCardImage})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
+                                backgroundSize: `${120 + (storedLists.length * 100)}%`,
+                                backgroundPosition: '55% 20%',
                                 width: '100%',
                                 height: '100%',
                                 position: 'absolute',
@@ -81,6 +81,7 @@ const DeckList = () => {
                                 left: 0,
                             }}
                         ></Box>
+
                         <Typography
                             variant="body1"
                             style={{
@@ -100,49 +101,40 @@ const DeckList = () => {
                 </Box>
 
                 {storedLists.map((list, index) => (
-                    <Box key={index} mx="10px" flex="1" height="80vh">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleListButtonClick(index)}
-                            fullWidth
-                            sx={{ height: "100%", minHeight: "64px" }}
-                            style={{
-                                position: 'relative',
-                                flex: '1',
-                                overflow: 'hidden',
-                            }}
-                        >
-                            <Box
-                                style={{
-                                    backgroundImage: `url(${list.backgroundImage})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                    width: '100%',
-                                    height: '100%',
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                }}
-                            ></Box>
-                            <Typography
-                                variant="body1"
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)',
-                                    backgroundColor: 'black',
-                                    color: 'white',
-                                    padding: '8px',
-                                    borderRadius: '5px',
-                                }}
-                            >
-                                {list.name}
-                            </Typography>
-                        </Button>
-                    </Box>
-                ))}
+    <Box key={index} mx="10px" flex="1" height="80vh">
+        <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleListButtonClick(index)}
+            fullWidth
+            sx={{ height: "100%", minHeight: "64px" }}
+            style={{ 
+                backgroundImage: `url(${list.backgroundImage})`,
+                backgroundSize: `${120 + (storedLists.length * 100)}%`,
+                backgroundPosition: '55% 20%',
+            }}
+        >
+            <Typography
+                variant="body1"
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    backgroundColor: 'black',
+                    color: 'white',
+                    padding: '8px',
+                    borderRadius: '5px',
+                }}
+            >  
+                {list.name}
+            </Typography>
+        </Button>
+    </Box>
+))}
+
+
+
             </Box>
         </Box>
     );
