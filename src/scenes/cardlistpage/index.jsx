@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField } from '@mui/material';
 import CardListDisplay from '../../components/CardListDisplay';
+import Header from '../../components/Header';
 
 const CardListPage = () => {
     const [searchInput, setSearchInput] = useState('shop');
@@ -11,9 +12,9 @@ const CardListPage = () => {
 
     return (
         <Box m="20px">
-            <Typography variant="h4" mb="20px">
-                Magic Card List
-            </Typography>
+            <Header title="Search cards on our shop" subtitle="search cards on our shop" variant="h4" mb="20px">
+               
+            </Header>
             <Box mb="20px" display="flex" alignItems="center">
                 <TextField
                     label="Search"

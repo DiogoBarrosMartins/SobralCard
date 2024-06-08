@@ -4,6 +4,7 @@ import Card from '../../components/Card';
 import { getCardDetailsByName } from "../../services/card-service";
 import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header';
+
 const CardScene = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -51,10 +52,9 @@ const CardScene = () => {
     };
 
     return (
-        <Box m="20px">
-            <Typography variant="h4" mb="20px">
-                Magic Card Scene
-            </Typography>
+        <Box m="20px" height="80vh"> {/* Set height to 80vh */}
+            <Header variant="h4" mb="20px" title="Search your cards" subtitle="yeah">               
+            </Header>
             <Box mb="20px" display="flex" alignItems="center">
                 <TextField
                     label="Search"
@@ -64,16 +64,16 @@ const CardScene = () => {
                     sx={{ mr: 2 }}
                 />
                 <Button variant="contained" color="primary" onClick={handleSearchClick}>
-                    Search
+                    <Typography>Search</Typography> 
                 </Button>
                 
                 <Button variant="contained" color="primary" onClick={handleGoBack}>
-                    Go back 
+                  <Typography>Go back</Typography> 
                 </Button>
             </Box>
             {error && <div>Error: {error}</div>}
             {card && (
-                <Box > {/* Adjust height as needed */}
+                <Box height="100%" marginLeft={"20px"}>
                     <Card card={card} />
                 </Box>
             )}
