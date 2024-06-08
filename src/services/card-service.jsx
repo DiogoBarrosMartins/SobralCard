@@ -42,31 +42,25 @@ export async function getCardDetailsByName(searchInput) {
 
 export async function getCardsByString(searchInput) {
     try {
-        const response = await fetch(`${API_BASE_URL}/search?q=${searchInput}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        const response = await axios.get(`${API_BASE_URL}/cards/search`, {
+            params: { q: searchInput }
+        });
+        if (!response.data.data) {
+            throw new Error("No cards found");
         }
-        const data = await response.json();
-
-        if (!Array.isArray(data.data)) {
-            throw new Error("Expected an array of cards");
-        }
-
-        const processedCards = data.data.map((element) => ({
+        const processedCards = response.data.data.map((element) => ({
             name: element.name,
             id: element.id,
             card: element.image_uris
                 ? element.image_uris.normal
                 : element.card_faces[0].image_uris.normal,
         }));
-
         return processedCards;
     } catch (error) {
         console.error("Error fetching cards:", error);
         throw error;
     }
 }
-
 
 
 export const fetchRandomCardImage = async () => {
