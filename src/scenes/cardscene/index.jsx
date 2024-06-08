@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button } from '@mui/material';
 import Card from '../../components/Card';
 import { getCardDetailsByName } from "../../services/card-service";
 import { useLocation } from 'react-router-dom';
-
+import Header from '../../components/Header';
 const CardScene = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);

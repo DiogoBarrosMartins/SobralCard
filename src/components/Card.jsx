@@ -9,7 +9,7 @@ const Card = ({ card }) => {
           <img
             src={card.card}
             alt={card.name}
-            style={{  borderRadius: '25px', objectFit: 'cover', marginLeft: "20px" }}
+            style={{  borderRadius: '25px', objectFit: 'cover' }}
           />
         </Box>
       )}
