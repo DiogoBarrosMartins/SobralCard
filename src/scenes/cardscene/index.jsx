@@ -9,9 +9,7 @@ const CardScene = () => {
     const searchParams = new URLSearchParams(location.search);
     let searchInputFromURL = searchParams.get('name') || 'Cosmic Epiphany'; 
 
-    // Check if the search input starts with "A-"
     if (searchInputFromURL.startsWith("A-")) {
-        // Remove the "A-" prefix
         searchInputFromURL = searchInputFromURL.substring(2);
     }
 
@@ -74,7 +72,11 @@ const CardScene = () => {
                 </Button>
             </Box>
             {error && <div>Error: {error}</div>}
-            {card && <Card card={card} />}
+            {card && (
+                <Box > {/* Adjust height as needed */}
+                    <Card card={card} />
+                </Box>
+            )}
         </Box>
     );
 };
