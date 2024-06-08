@@ -39,6 +39,7 @@ export async function getRandomCard(callbackFunction) {
     }
 }
 
+
 export async function getCardDetailsByName(searchInput) {
     try {
         const response = await axios.get(`${API_BASE_URL}/search`, {
@@ -102,7 +103,43 @@ export async function getCardsByString(searchInput) {
         throw error;
     }
 }
-
+export const fetchRandomCardImage = async () => {
+    try {
+      const cardNames = ["Book Burning", "Book Devourer", "Book of Mazarbul", "Bookwurm", "Storybook Ride", "Spellbook Vendor"];
+      const searchString = 'book';
+      let response = await getCardDetailsByName(searchString);
+  
+      console.log("Response from getCardDetailsByName:", response);
+  
+      // Ensure response is always an array
+      if (!Array.isArray(response)) {
+        // If response is not an array, convert it to an array
+        response = [response];
+      }
+  
+      // Filter out cards with names in the cardNames array
+      const filteredCards = response.filter(card => !cardNames.includes(card.name));
+      if (filteredCards.length === 0) {
+        throw new Error("No matching cards found");
+      }
+  
+      // Select a random card from the filtered cards
+      const randomCard = filteredCards[Math.floor(Math.random() * filteredCards.length)];
+  
+      // Extract the art property from the random card, or use a default image URL if it's not available
+      const artCropImage = randomCard.art || 'default_image_url';
+  
+      // Return the artCropImage
+      return artCropImage;
+    } catch (error) {
+      console.error("Error fetching random card image:", error);
+      // If there's an error, return a default image URL
+      return 'default_image_url';
+    }
+  };
+  
+  
+  
 export async function openBooster(callbackFunction) {
     try {
         const response = await axios.get(`${API_BASE_URL}/search`, {
