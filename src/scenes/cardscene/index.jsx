@@ -50,11 +50,11 @@ const CardScene = () => {
     };
 
     const handleGoBack = () => {
-        navigate('/'); // Use navigate instead of window.location.href
+        navigate('/'); 
     };
 
     return (
-        <Box m="20px" height="80vh"> {/* Set height to 80vh */}
+        <Box m="20px" height="80vh">
             <Header variant="h4" mb="20px" title="Search your cards" subtitle="yeah">               
             </Header>
             <Box mb="20px" display="flex" alignItems="center">

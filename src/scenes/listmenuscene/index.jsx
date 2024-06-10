@@ -7,9 +7,7 @@ import { fetchRandomCardImage, getCardsByString } from "../../services/card-serv
 import { useNavigate } from 'react-router-dom';
 import { tokens } from '../../theme';
 
-
-const ListMenuScene = () => {
-    const [storedLists, setStoredLists] = useState([]);
+const ListMenuScene = ({ storedLists, setStoredLists, updateSidebar }) => {
     const [randomCardImage, setRandomCardImage] = useState('');
     const [selectedListToDelete, setSelectedListToDelete] = useState('');
     const [listImages, setListImages] = useState({});
@@ -24,7 +22,7 @@ const ListMenuScene = () => {
         if (storedListsString) {
             setStoredLists(JSON.parse(storedListsString));
         }
-    }, []);
+    }, [setStoredLists]);
 
     useEffect(() => {
         const fetchImage = async () => {
@@ -76,6 +74,7 @@ const ListMenuScene = () => {
                     const updatedLists = [...storedLists, newList];
                     localStorage.setItem('storedLists', JSON.stringify(updatedLists));
                     setStoredLists(updatedLists);
+                    updateSidebar(); // Update sidebar after adding list
                 }
             } catch (error) {
                 console.error("Error adding new list:", error);
@@ -90,6 +89,7 @@ const ListMenuScene = () => {
                 const updatedLists = storedLists.filter(list => list.name !== selectedListToDelete);
                 localStorage.setItem('storedLists', JSON.stringify(updatedLists));
                 setStoredLists(updatedLists);
+                updateSidebar(); // Update sidebar after deleting list
             }
         }
     };
@@ -99,6 +99,7 @@ const ListMenuScene = () => {
         if (confirmed) {
             localStorage.removeItem('storedLists');
             setStoredLists([]);
+            updateSidebar(); // Update sidebar after deleting all lists
         }
     };
 
@@ -137,7 +138,7 @@ const ListMenuScene = () => {
                         </MenuItem>
                     ))}
                 </Select>
-                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2, backgroundColor: colors.redAccent[500] }}>
+                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2,  backgroundColor: colors.redAccent[500]}}>
                     Delete List
                 </Button>
                 <TextField

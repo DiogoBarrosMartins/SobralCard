@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { getCardsByString } from '../../services/card-service';
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
+import RightSidebar from '../global/Rightsidebar'; 
 
 const ListScene = () => {
     const [cards, setCards] = useState([]);
@@ -45,7 +46,7 @@ const ListScene = () => {
     };
 
     const handleAddCard = async () => {
-        const cardName = prompt('Enter the name of the card to add:');
+        let cardName = prompt('Enter the name of the card to add:');
         if (cardName) {
             try {
                 const card = await getCardsByString(cardName);
@@ -94,80 +95,81 @@ const ListScene = () => {
     };
 
     return (
-        <Box m="20px">
-            <Header title={`List: ${listName}`} subtitle={`Cards in your list : ${cards.length}`} variant="h4" mb="20px" />
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '20px',
-                marginBottom: '20px',
-             
-            }}>
+        <Box m="20px" display="flex">
+            <Box flexGrow={1}>
+                <Header title={`List: ${listName}`} subtitle={`Cards in your list : ${cards.length}`} variant="h4" mb="20px" />
                 <Box sx={{
                     display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    gap: '10px',
-                    marginBottom: '20px',
-                   
-                }}>
-                    <Button 
-                        variant="contained" 
-                        sx={{ backgroundColor: colors.greenAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.greenAccent[600] } }}
-                        onClick={handleAddCard}
-                    >
-                        Add New Card
-                    </Button>
-                    <Button 
-                        variant="contained" 
-                        sx={{ backgroundColor: colors.redAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.redAccent[600] } }}
-                        onClick={handleDeleteAllCards}
-                    >
-                        Delete All Cards
-                    </Button>
-                    <Button 
-                        variant="contained" 
-                        sx={{ backgroundColor: colors.greenAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.blueAccent[600] } }}
-                        onClick={handleGoBack}
-                    >
-                        Go Back to List Menu
-                    </Button>
-                </Box>
-                <Box sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                     gap: '20px',
+                    marginBottom: '20px',
                 }}>
-                    {cards.map(card => (
-                        <MuiLink 
-                            key={card.id} 
-                            component="button"
-                            onClick={() => handleCardClick(card.name)} 
-                            sx={{ textDecoration: 'none' }}
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        marginBottom: '20px',
+                    }}>
+                        <Button 
+                            variant="contained" 
+                            sx={{ backgroundColor: colors.greenAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.greenAccent[600] } }}
+                            onClick={handleAddCard}
                         >
-                            <Card sx={{ width: 200, cursor: 'pointer' }}>
-                                <CardMedia
-                                    component="img"
-                                    image={card.card}
-                                    alt={card.name}
-                                    sx={{ height: "250px", borderRadius: "4px" }}
-                                />
-                                <CardContent sx={{ backgroundColor: colors.primary[400] }}>
-                                    <Typography variant="h6" color={colors.grey[100]}>{card.name}</Typography>
-                                    <Typography variant="body2" color={colors.grey[100]}>
-                                        Mana Cost: {card.mana_cost || 'N/A'}
-                                    </Typography>
-                                    <Typography variant="body2" color={colors.grey[100]}>
-                                        Price: {card.prices ? `€${card.prices}` : 'N/A'}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </MuiLink>
-                    ))}
+                            Add New Card
+                        </Button>
+                        <Button 
+                            variant="contained" 
+                            sx={{ backgroundColor: colors.redAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.redAccent[600] } }}
+                            onClick={handleDeleteAllCards}
+                        >
+                            Delete All Cards
+                        </Button>
+                        <Button 
+                            variant="contained" 
+                            sx={{ backgroundColor: colors.greenAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.blueAccent[600] } }}
+                            onClick={handleGoBack}
+                        >
+                            Go Back to List Menu
+                        </Button>
+                    </Box>
+                    <Box sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '20px',
+                    }}>
+                        {cards.map(card => (
+                            <MuiLink 
+                                key={card.id} 
+                                component="button"
+                                onClick={() => handleCardClick(card.name)} 
+                                sx={{ textDecoration: 'none' }}
+                            >
+                                <Card sx={{ width: 200, cursor: 'pointer' }}>
+                                    <CardMedia
+                                        component="img"
+                                        image={card.card}
+                                        alt={card.name}
+                                        sx={{ height: "250px", borderRadius: "4px" }}
+                                    />
+                                    <CardContent sx={{ backgroundColor: colors.primary[400] }}>
+                                        <Typography variant="h6" color={colors.grey[100]}>{card.name}</Typography>
+                                        <Typography variant="body2" color={colors.grey[100]}>
+                                            Mana Cost: {card.mana_cost || 'N/A'}
+                                        </Typography>
+                                        <Typography variant="body2" color={colors.grey[100]}>
+                                            Price: {card.prices ? `€${card.prices}` : 'N/A'}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </MuiLink>
+                        ))}
+                    </Box>
                 </Box>
             </Box>
+            <RightSidebar cards={cards} listName={listName} />
         </Box>
     );
 };

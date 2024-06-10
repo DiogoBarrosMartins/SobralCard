@@ -17,7 +17,16 @@ export async function getCardsByString(searchInput) {
         }
 
         console.log("Processing cards data:", response.data.data);
-        const processedCards = response.data.data.map((element) => ({
+
+        // Filter out cards with names starting with "A-"
+        const nonAlchemyCards = response.data.data.filter(card => !card.name.startsWith("A-"));
+
+        if (nonAlchemyCards.length === 0) {
+            console.error("No non-Alchemy cards found in the response:", response);
+            throw new Error("No non-Alchemy cards found");
+        }
+
+        const processedCards = nonAlchemyCards.map((element) => ({
             name: element.name,
             id: element.id,
             card: element.image_uris
@@ -25,8 +34,7 @@ export async function getCardsByString(searchInput) {
                 : element.card_faces[0].image_uris.large,
             mana_cost: element.mana_cost,
             prices: element.prices.eur,
-            art: element.image_uris  ? element.image_uris.art_crop
-            : element.card_faces[0].image_uris.large
+            art: element.image_uris ? element.image_uris.art_crop : element.card_faces[0].image_uris.large
         }));
 
         console.log("Processed cards:", processedCards);
@@ -43,9 +51,9 @@ export async function fetchRandomCardImage() {
     const cards = await getCardsByString(searchString);
     return cards[Math.floor(Math.random() * cards.length)];
 }
+
 export async function fetchCardImage() {
     const searchString = "archive"; 
     const cards = await getCardsByString(searchString);
     return cards[0];
 }
-
