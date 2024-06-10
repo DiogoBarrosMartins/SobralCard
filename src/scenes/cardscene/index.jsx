@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import Card from '../../components/Card';
-import { getCardDetailsByName } from "../../services/card-service";
+import { getCardsByString } from "../../services/card-service";
 import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header';
+
 
 const CardScene = () => {
     const location = useLocation();
@@ -21,7 +22,7 @@ const CardScene = () => {
     useEffect(() => {
         const fetchCard = async () => {
             try {
-                const fetchedCard = await getCardDetailsByName(searchInput);
+                const fetchedCard = await getCardsByString(searchInput);
                 setCard(fetchedCard);
             } catch (error) {
                 setError(error.message);
@@ -36,7 +37,7 @@ const CardScene = () => {
 
     const handleSearchClick = async () => {
         try {
-            const fetchedCard = await getCardDetailsByName(searchInput);
+            const fetchedCard = await getCardsByString(searchInput);
             if (fetchedCard) {
                 setCard(fetchedCard);
             } else {
@@ -73,7 +74,7 @@ const CardScene = () => {
             </Box>
             {error && <div>Error: {error}</div>}
             {card && (
-                <Box height="100%" marginLeft={"20px"}>
+                <Box height="80%" marginLeft={"20px"}>
                     <Card card={card} />
                 </Box>
             )}

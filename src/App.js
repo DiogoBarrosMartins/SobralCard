@@ -6,8 +6,8 @@ import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import CardListPage from "./scenes/cardlistpage";
 import CardScene from "./scenes/cardscene";
-import SelectedCards from "./scenes/decklist";
-import CardSearchScene from "./scenes/cardseachscene";
+import SelectedCards from "./scenes/listmenuscene";
+import CardSearchScene from "./scenes/listscene";
 
 function App() {
   const [theme, colorMode] = useMode();
