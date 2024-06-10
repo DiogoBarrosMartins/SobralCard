@@ -4,6 +4,7 @@ import { Box, Button, Card, CardMedia, CardContent, Typography, Link as MuiLink,
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getCardsByString } from '../../services/card-service';
 import { tokens } from '../../theme';
+import Header from '../../components/Header';
 
 const ListScene = () => {
     const [cards, setCards] = useState([]);
@@ -93,50 +94,52 @@ const ListScene = () => {
     };
 
     return (
-        <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '20px',
-            marginBottom: '20px',
-        }}>
-            <Typography variant="h4">{listName}</Typography>
-            <Typography variant="subtitle1">Cards in your list: {cards.length}</Typography>
-            <Button variant="contained" color="primary" onClick={handleAddCard}>Add New Card</Button>
-            <Button variant="contained" color="primary" onClick={handleDeleteAllCards}>Delete All Cards</Button>
-            <Button variant="contained" color="primary" onClick={handleGoBack}>Go Back to List Menu</Button>
+        <Box m="20px">
+            <Header   title={`List: ${listName}`} subtitle={`Cards in your list : ${cards.length}`} variant="h4" mb="20px" />
             <Box sx={{
                 display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center',
                 gap: '20px',
+                marginBottom: '20px',
             }}>
-                {cards.map(card => (
-                    <MuiLink 
-                        key={card.id} 
-                        component="button"
-                        onClick={() => handleCardClick(card.name)} 
-                        sx={{ textDecoration: 'none' }}
-                    >
-                        <Card sx={{ width: 200, cursor: 'pointer' }}>
-                            <CardMedia
-                                component="img"
-                                image={card.card}
-                                alt={card.name}
-                                sx={{ height: "250px", borderRadius: "4px" }}
-                            />
-                            <CardContent sx={{ backgroundColor: colors.primary[400] }}>
-                                <Typography variant="h6" color={colors.grey[100]}>{card.name}</Typography>
-                                <Typography variant="body2" color={colors.grey[100]}>
-                                    Mana Cost: {card.mana_cost || 'N/A'}
-                                </Typography>
-                                <Typography variant="body2" color={colors.grey[100]}>
-                                    Price: {card.prices ? `€${card.prices}` : 'N/A'}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </MuiLink>
-                ))}
+              
+                <Button variant="contained" color="primary" onClick={handleAddCard}>Add New Card</Button>
+                <Button variant="contained" color="primary" onClick={handleDeleteAllCards}>Delete All Cards</Button>
+                <Button variant="contained" color="primary" onClick={handleGoBack}>Go Back to List Menu</Button>
+                <Box sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: '20px',
+                }}>
+                    {cards.map(card => (
+                        <MuiLink 
+                            key={card.id} 
+                            component="button"
+                            onClick={() => handleCardClick(card.name)} 
+                            sx={{ textDecoration: 'none' }}
+                        >
+                            <Card sx={{ width: 200, cursor: 'pointer' }}>
+                                <CardMedia
+                                    component="img"
+                                    image={card.card}
+                                    alt={card.name}
+                                    sx={{ height: "250px", borderRadius: "4px" }}
+                                />
+                                <CardContent sx={{ backgroundColor: colors.primary[400] }}>
+                                    <Typography variant="h6" color={colors.grey[100]}>{card.name}</Typography>
+                                    <Typography variant="body2" color={colors.grey[100]}>
+                                        Mana Cost: {card.mana_cost || 'N/A'}
+                                    </Typography>
+                                    <Typography variant="body2" color={colors.grey[100]}>
+                                        Price: {card.prices ? `€${card.prices}` : 'N/A'}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </MuiLink>
+                    ))}
+                </Box>
             </Box>
         </Box>
     );

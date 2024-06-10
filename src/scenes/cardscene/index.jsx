@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import Card from '../../components/Card';
 import { getCardsByString } from "../../services/card-service";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
-
 
 const CardScene = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     let searchInputFromURL = searchParams.get('name') || 'Cosmic Epiphany'; 
 
@@ -50,7 +50,7 @@ const CardScene = () => {
     };
 
     const handleGoBack = () => {
-        window.location.href = '/';
+        navigate('/'); // Use navigate instead of window.location.href
     };
 
     return (
@@ -82,4 +82,5 @@ const CardScene = () => {
         </Box>
     );
 };
-export default CardScene; 
+
+export default CardScene;

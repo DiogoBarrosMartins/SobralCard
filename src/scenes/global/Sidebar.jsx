@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -26,11 +26,23 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    const storedListsString = localStorage.getItem('storedLists');
+    if (storedListsString) {
+      setLists(JSON.parse(storedListsString));
+    }
+  }, []);
 
   return (
     <Box
@@ -98,42 +110,47 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                SobralCard
+                  SobralCard
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                The Market
+                  The Market
                 </Typography>
               </Box>
             </Box>
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          
-          
-          <Item
-                  title="Search Cards"
-                  to="/"
-                  icon={<ViewCarouselIcon/>}
-                  selected={selected}
-                  setSelected={setSelected}
-               /> 
-<Item
-                  title="Your Lists"
-                  to="/deck"
-                  icon={<AddIcon/>}
-                  selected={selected}
-                  setSelected={setSelected}
-               /> 
+            <Item
+              title="Search Cards"
+              to="/"
+              icon={<ViewCarouselIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Your Lists"
+              to="/deck"
+              icon={<AddIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-         
+              Lists
             </Typography>
-           
-            
-          
+            {lists.map((list, index) => (
+              <Item
+                key={index}
+                title={capitalizeFirstLetter(list.name)}
+                to={`/list?name=${encodeURIComponent(list.name)}`}
+                icon={<ViewCarouselIcon />} // Use an appropriate icon
+                selected={selected}
+                setSelected={setSelected}
+              />
+            ))}
           </Box>
         </Menu>
       </ProSidebar>
