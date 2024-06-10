@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, MenuItem, Select, TextField } from '@mui/material';
+import { Box, Button, MenuItem, Select, TextField, useTheme } from '@mui/material';
 import Header from "../../components/Header";
 import ListActions from '../../components/ListActions';
 import ListDisplay from '../../components/ListDisplay';
 import { fetchRandomCardImage, getCardsByString } from "../../services/card-service";
 import { useNavigate } from 'react-router-dom';
+import { tokens } from '../../theme';
+
 
 const ListMenuScene = () => {
     const [storedLists, setStoredLists] = useState([]);
@@ -13,6 +15,9 @@ const ListMenuScene = () => {
     const [listImages, setListImages] = useState({});
     const [searchInput, setSearchInput] = useState('');
     const navigate = useNavigate();
+    const theme = useTheme();
+
+    const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
         const storedListsString = localStorage.getItem('storedLists');
@@ -113,7 +118,7 @@ const ListMenuScene = () => {
         <Box m="20px" display="flex" flexDirection="column" height="84vh">
             <Header title="My Lists" subtitle="Your Lists" />
             <Box display="flex" alignItems="center" mb={2}>
-                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteAllLists} sx={{ ml: 2 }}>
+                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteAllLists} sx={{ ml: 2, backgroundColor: colors.redAccent[500]}}>
                     Delete All Lists
                 </Button>
                 <Select
@@ -132,7 +137,7 @@ const ListMenuScene = () => {
                         </MenuItem>
                     ))}
                 </Select>
-                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2 }}>
+                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2, backgroundColor: colors.redAccent[500] }}>
                     Delete List
                 </Button>
                 <TextField

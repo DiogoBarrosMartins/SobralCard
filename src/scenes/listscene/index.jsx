@@ -102,6 +102,7 @@ const ListScene = () => {
                 alignItems: 'center',
                 gap: '20px',
                 marginBottom: '20px',
+             
             }}>
                 <Box sx={{
                     display: 'flex',
@@ -109,10 +110,29 @@ const ListScene = () => {
                     justifyContent: 'center',
                     gap: '10px',
                     marginBottom: '20px',
+                   
                 }}>
-                    <Button variant="contained" color="primary" onClick={handleAddCard}>Add New Card</Button>
-                    <Button variant="contained" color="primary" onClick={handleDeleteAllCards}>Delete All Cards</Button>
-                    <Button variant="contained" color="primary" onClick={handleGoBack}>Go Back to List Menu</Button>
+                    <Button 
+                        variant="contained" 
+                        sx={{ backgroundColor: colors.greenAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.greenAccent[600] } }}
+                        onClick={handleAddCard}
+                    >
+                        Add New Card
+                    </Button>
+                    <Button 
+                        variant="contained" 
+                        sx={{ backgroundColor: colors.redAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.redAccent[600] } }}
+                        onClick={handleDeleteAllCards}
+                    >
+                        Delete All Cards
+                    </Button>
+                    <Button 
+                        variant="contained" 
+                        sx={{ backgroundColor: colors.greenAccent[500], color: colors.primary[900], '&:hover': { backgroundColor: colors.blueAccent[600] } }}
+                        onClick={handleGoBack}
+                    >
+                        Go Back to List Menu
+                    </Button>
                 </Box>
                 <Box sx={{
                     display: 'flex',
