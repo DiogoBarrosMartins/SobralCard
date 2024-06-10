@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { getCardsByString } from '../../services/card-service';
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
-import RightSidebar from '../global/Rightsidebar'; 
+import RightSidebar from '../global/Rightsidebar';
 
 const ListScene = () => {
     const [cards, setCards] = useState([]);
@@ -51,10 +51,9 @@ const ListScene = () => {
             try {
                 const card = await getCardsByString(cardName);
                 if (card && card.length > 0) {
-                    const newCards = [...cards, card[0]]; // Add only the first card
+                    const newCards = [...cards, card[0]];
                     setCards(newCards);
 
-                    // Update local storage
                     const storedListsString = localStorage.getItem('storedLists');
                     if (storedListsString) {
                         const storedLists = JSON.parse(storedListsString);
@@ -95,9 +94,9 @@ const ListScene = () => {
     };
 
     return (
-        <Box m="20px" display="flex">
-            <Box flexGrow={1}>
-                <Header title={`List: ${listName}`} subtitle={`Cards in your list : ${cards.length}`} variant="h4" mb="20px" />
+        <Box m="20px" display="flex" height="100vh">
+            <Box flexGrow={1} marginRight="20px">
+                <Header title={`List: ${listName}`} subtitle={`Cards in your list: ${cards.length}`} variant="h4" mb="20px" />
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -147,15 +146,15 @@ const ListScene = () => {
                                 onClick={() => handleCardClick(card.name)} 
                                 sx={{ textDecoration: 'none' }}
                             >
-                                <Card sx={{ width: 200, cursor: 'pointer' }}>
+                                <Card sx={{ width: 200, height: 350, cursor: 'pointer' }}>
                                     <CardMedia
                                         component="img"
                                         image={card.card}
                                         alt={card.name}
-                                        sx={{ height: "250px", borderRadius: "4px" }}
+                                        sx={{ height: "250px", objectFit: "contain", borderRadius: "28px" }}
                                     />
-                                    <CardContent sx={{ backgroundColor: colors.primary[400] }}>
-                                        <Typography variant="h6" color={colors.grey[100]}>{card.name}</Typography>
+                                    <CardContent sx={{ height: "100px", overflow: "hidden" }}>
+                                        <Typography variant="h6" color={colors.grey[100]} noWrap>{card.name}</Typography>
                                         <Typography variant="body2" color={colors.grey[100]}>
                                             Mana Cost: {card.mana_cost || 'N/A'}
                                         </Typography>

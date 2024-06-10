@@ -115,11 +115,20 @@ const ListMenuScene = ({ storedLists, setStoredLists, updateSidebar }) => {
         list && list.name && list.name.toLowerCase().includes(searchInput.toLowerCase())
     );
 
+    // Define common button styles
+    const deleteButtonStyles = {
+        backgroundColor: colors.redAccent[500],
+        color: colors.primary[900],
+        '&:hover': {
+            backgroundColor: colors.redAccent[600],
+        },
+    };
+
     return (
         <Box m="20px" display="flex" flexDirection="column" height="84vh">
             <Header title="My Lists" subtitle="Your Lists" />
             <Box display="flex" alignItems="center" mb={2}>
-                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteAllLists} sx={{ ml: 2, backgroundColor: colors.redAccent[500]}}>
+                <Button variant="contained"  onClick={handleDeleteAllLists} sx={{ ml: 2, ...deleteButtonStyles }}>
                     Delete All Lists
                 </Button>
                 <Select
@@ -138,7 +147,7 @@ const ListMenuScene = ({ storedLists, setStoredLists, updateSidebar }) => {
                         </MenuItem>
                     ))}
                 </Select>
-                <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2,  backgroundColor: colors.redAccent[500]}}>
+                <Button variant="contained" onClick={handleDeleteList} sx={{ ml: 2, ...deleteButtonStyles }}>
                     Delete List
                 </Button>
                 <TextField
