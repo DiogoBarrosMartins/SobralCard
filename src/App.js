@@ -23,7 +23,7 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<CardListPage />} />
-              <Route path="/card" element={<CardScene />} />
+              <Route path="/card/:name" element={<CardScene />} />
               <Route path="/deck" element={<SelectedCards />} />
               <Route path="/list" element={<CardSearchScene />} />
             </Routes>

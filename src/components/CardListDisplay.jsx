@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Card, CardMedia, Link as MuiLink, Typography } from '@mui/material';
 import { getCardsByString } from '../services/card-service';
-import { useNavigate } from 'react-router-dom';
 
-const CardListDisplay = ({ searchInput }) => {
+const CardListDisplay = ({ searchInput, onCardClick }) => {
     const [cards, setCards] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchCards(searchInput);
@@ -24,8 +22,8 @@ const CardListDisplay = ({ searchInput }) => {
         }
     };
 
-    const handleCardClick = (cardName) => {
-        navigate(`/card?name=${encodeURIComponent(cardName)}`);
+    const handleCardClick = (card) => {
+        onCardClick(card);
     };
 
     return (
@@ -41,7 +39,7 @@ const CardListDisplay = ({ searchInput }) => {
                 <MuiLink 
                     key={card.id} 
                     component="button"
-                    onClick={() => handleCardClick(card.name)} 
+                    onClick={() => handleCardClick(card)} 
                     sx={{ textDecoration: 'none' }}
                 >
                     <Card sx={{ width: 200, cursor: 'pointer' }}>
@@ -60,6 +58,7 @@ const CardListDisplay = ({ searchInput }) => {
 
 CardListDisplay.propTypes = {
     searchInput: PropTypes.string.isRequired,
+    onCardClick: PropTypes.func.isRequired,
 };
 
 export default CardListDisplay;
