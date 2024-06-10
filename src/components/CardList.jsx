@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Typography } from '@mui/material';
-import CardItem from './CardItem';
-import { getCardsByString } from '../services/card-service';
 
-const CardList = ({ searchInput, onCardClick }) => {
-    const [cards, setCards] = useState([]);
+const CardList = ({ card }) => {
+  if (!card) {
+    return <Typography color="error">Card data is missing</Typography>;
+  }
 
-    useEffect(() => {
-        if (searchInput) {
-            fetchCards(searchInput);
-        }
-    }, [searchInput]);
+  const { card: cardImage, name, mana_cost, prices } = card;
 
-    const fetchCards = async (input) => {
-        try {
-            const fetchedCards = await getCardsByString(input);
-            setCards(fetchedCards);
-        } catch (error) {
-            console.error('Error fetching cards:', error);
-            setCards([]);
-        }
-    };
+  if (!cardImage || !name) {
+    return <Typography color="error">Invalid card data</Typography>;
+  }
 
-    return (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginBottom: '20px' }}>
-            {cards.length === 0 && <Typography>No cards found.</Typography>}
-            {cards.map(card => (
-                <CardItem key={card.id} card={card} onCardClick={onCardClick} />
-            ))}
-        </Box>
-    );
+  return (
+    <Box display="flex" alignItems="center" gap={2} height="90%" width="80%">
+      <img src={cardImage} alt={name} style={{ maxWidth: '80%', maxHeight: '80%', borderRadius: "25px" }} />
+      <Box flex="1">
+        <Typography variant="h4">{name}</Typography>
+        {mana_cost && (
+          <Typography variant="body1">Mana Cost: {mana_cost}</Typography>
+        )}
+        {prices ? (
+          <Typography variant="body1">Price: {prices}€</Typography>
+        ) : (
+          <Typography variant="body1">Priceless</Typography>
+        )}
+      </Box>
+    </Box>
+  );
 };
 
 export default CardList;

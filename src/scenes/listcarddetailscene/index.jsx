@@ -1,9 +1,8 @@
-// ListCardDetailScene.jsx
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getCardsByString } from '../../services/card-service';
-import Card from '../../components/Card'; // Ensure this path is correct
+import CardList from '../../components/CardList'; // Ensure this path is correct
 import Header from '../../components/Header'; // Ensure this path is correct
 
 const ListCardDetailScene = () => {
@@ -44,7 +43,7 @@ const ListCardDetailScene = () => {
             </Box>
             {card && (
                 <Box height="80%" marginLeft={"20px"}>
-                    <Card card={card} />
+                    <CardList card={card} />
                 </Box>
             )}
             {error && <Typography color="error">{error}</Typography>}
@@ -53,3 +52,4 @@ const ListCardDetailScene = () => {
 };
 
 export default ListCardDetailScene;
+

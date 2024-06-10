@@ -8,8 +8,7 @@ import CardListPage from "./scenes/cardlistpage";
 import CardScene from "./scenes/cardscene";
 import SelectedCards from "./scenes/listmenuscene";
 import CardSearchScene from "./scenes/listscene";
-import ListCardDetailScene from "./scenes/listcarddetailscene"; 
-
+import ListCardDetailScene from "./scenes/listcarddetailscene";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
