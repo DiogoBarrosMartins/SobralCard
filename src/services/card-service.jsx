@@ -39,7 +39,7 @@ export async function getCardsByString(searchInput) {
 }
 
 export async function fetchRandomCardImage() {
-    const searchString = "archive"; 
+    const searchString = "scroll"; 
     const cards = await getCardsByString(searchString);
     return cards[Math.floor(Math.random() * cards.length)];
 }

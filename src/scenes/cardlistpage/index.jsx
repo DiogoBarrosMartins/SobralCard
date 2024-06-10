@@ -3,7 +3,7 @@ import { Box, TextField, Button } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CardListDisplay from '../../components/CardListDisplay';
 import Header from '../../components/Header';
-import CardDetail from '../../components/CardDetail'; // Create this component
+import CardDetail from '../../components/CardDetail'; 
 
 const CardListPage = () => {
     const [searchInput, setSearchInput] = useState('shop');
@@ -13,7 +13,9 @@ const CardListPage = () => {
 
     const handleCardClick = useCallback((card) => {
         setSelectedCard(card);
-        navigate(`/card/${encodeURIComponent(card.name)}?list=${encodeURIComponent(searchInput)}`);
+       
+            navigate(`/card?name=${encodeURIComponent(card.name)}`);
+
     }, [navigate, searchInput]);
 
     useEffect(() => {

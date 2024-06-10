@@ -82,5 +82,4 @@ const CardScene = () => {
         </Box>
     );
 };
-
-export default CardScene;
+export default CardScene; 

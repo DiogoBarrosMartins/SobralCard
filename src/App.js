@@ -8,6 +8,7 @@ import CardListPage from "./scenes/cardlistpage";
 import CardScene from "./scenes/cardscene";
 import SelectedCards from "./scenes/listmenuscene";
 import CardSearchScene from "./scenes/listscene";
+import ListCardDetailScene from "./scenes/listcarddetailscene"; 
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -23,9 +24,10 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<CardListPage />} />
-              <Route path="/card/:name" element={<CardScene />} />
+              <Route path="/card" element={<CardScene />} />
               <Route path="/deck" element={<SelectedCards />} />
               <Route path="/list" element={<CardSearchScene />} />
+              <Route path="/list/card/:name" element={<ListCardDetailScene />} />
             </Routes>
           </main>
         </div>

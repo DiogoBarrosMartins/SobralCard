@@ -1,33 +1,31 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Link as MuiLink, useTheme } from '@mui/material';
-import { tokens } from '../theme';
+import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
 
-const CardItem = ({ card, handleCardClick }) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+const CardItem = ({ card, onCardClick }) => {
+    const handleClick = () => {
+        if (onCardClick) {
+            onCardClick(card);
+        } else {
+            console.error('onCardClick is not a function');
+        }
+    };
 
     return (
-        <MuiLink 
-            key={card.id} 
-            component="button"
-            onClick={() => handleCardClick(card.name)} 
-            sx={{ textDecoration: 'none' }}
-        >
-            <Card sx={{ width: 200, cursor: 'pointer' }}>
+        <Box component="button" onClick={handleClick} sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+            <Card sx={{ width: 200 }}>
                 <CardMedia
                     component="img"
-                    image={card.card}
+                    image={card.image}
                     alt={card.name}
                     sx={{ height: "250px", borderRadius: "4px" }}
                 />
-                <CardContent sx={{ backgroundColor: colors.primary[400] }}>
-                    <Typography variant="h6" color={colors.grey[100]}>{card.name}</Typography>
-                    <Typography variant="body2" color={colors.grey[100]}>
-                        {card.prices ? `€${card.prices}` : 'N/A'}
-                    </Typography>
+                <CardContent>
+                    <Typography variant="h6">{card.name}</Typography>
+                    <Typography variant="body2">Mana Cost: {card.mana_cost || 'N/A'}</Typography>
+                    <Typography variant="body2">Price: {card.prices ? `€${card.prices}` : 'N/A'}</Typography>
                 </CardContent>
             </Card>
-        </MuiLink>
+        </Box>
     );
 };
 
