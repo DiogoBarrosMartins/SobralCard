@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography, MenuItem, Select, TextField } from '@mui/material';
+import { Box, Button, MenuItem, Select, TextField } from '@mui/material';
 import Header from "../../components/Header";
+import ListActions from '../../components/ListActions';
+import ListDisplay from '../../components/ListDisplay';
 import { fetchRandomCardImage, getCardsByString } from "../../services/card-service";
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +26,7 @@ const ListMenuScene = () => {
             try {
                 const card = await fetchRandomCardImage();
                 console.log("Card fetched:", card); 
-                setRandomCardImage(card.card);
+                setRandomCardImage(card.art);
             } catch (error) {
                 console.error("Error fetching card:", error);
             }
@@ -40,7 +42,7 @@ const ListMenuScene = () => {
                     try {
                         const card = await getCardsByString(list.name);
                         if (card.length > 0) {
-                            images[list.name] = card[0].card;
+                            images[list.name] = card[0].art;
                         } else {
                             images[list.name] = 'https://via.placeholder.com/150';
                         }
@@ -103,18 +105,14 @@ const ListMenuScene = () => {
         }
     };
 
-    const handleSearchInputChange = (e) => {
-        setSearchInput(e.target.value);
-    };
-
     const filteredLists = storedLists.filter(list => 
         list && list.name && list.name.toLowerCase().includes(searchInput.toLowerCase())
     );
 
     return (
         <Box m="20px" display="flex" flexDirection="column" height="84vh">
+            <Header title="My Lists" subtitle="Your Lists" />
             <Box display="flex" alignItems="center" mb={2}>
-                <Header title="My Lists" subtitle="Your Lists" />
                 <Button variant="contained" color="secondary" size="small" onClick={handleDeleteAllLists} sx={{ ml: 2 }}>
                     Delete All Lists
                 </Button>
@@ -137,82 +135,24 @@ const ListMenuScene = () => {
                 <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2 }}>
                     Delete List
                 </Button>
-               
+                <TextField
+                    variant="outlined"
+                    placeholder="Search Lists"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    sx={{ ml: 2, minWidth: 300 }}
+                />
             </Box>
-            <Box flex="1" display="flex" flexDirection="row" justifyContent="center">
-                <Box mx="10px" flex="1" display="flex" alignItems="stretch">
-                    <Button
-                        onClick={handleAddNewList}
-                        style={{
-                            position: 'relative',
-                            flex: '1',
-                            overflow: 'hidden',
-                        }}
-                    >
-                        <Box
-                            style={{
-                                backgroundImage: `url(${randomCardImage})`,
-                                backgroundSize: `${100 + (storedLists.length * 100)}%`,
-                                backgroundPosition: '55% 20%',
-                                width: '100%',
-                                height: '90%',
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                            }}
-                        ></Box>
-
-                        <Typography
-                            variant="h1"
-                            style={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                backgroundColor: 'black',
-                                color: 'white',
-                                padding: '8px',
-                                borderRadius: '5px',
-                            }}
-                        >
-                            Add New List
-                        </Typography>
-                    </Button>
-                </Box>
-                {filteredLists.map((list, index) => (
-                    <Box key={index} mx="10px" flex="1" height="80vh">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleListButtonClick(list.name)}
-                            fullWidth
-                            sx={{ height: "90%", minHeight: "64px" }}
-                            style={{ 
-                                backgroundImage: `url(${listImages[list.name] || 'https://via.placeholder.com/150'})`,
-                                
-                                backgroundSize: `${100 + (storedLists.length * 100)}%`,
-                                backgroundPosition: '55% 20%',
-                                
-                            }}
-                        >
-                            <Typography
-                                variant="h2"
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)',
-                                    backgroundColor: 'black',
-                                    color: 'white',
-                                    padding: '8px',
-                                    borderRadius: '5px',
-                                }}
-                            >  
-                                {list.name}
-                            </Typography>
-                        </Button>
-                    </Box>
-                ))}
+            <Box display="flex" flexWrap="wrap" gap="20px" justifyContent="center">
+                <ListActions 
+                    handleAddNewList={handleAddNewList} 
+                    randomCardImage={randomCardImage} 
+                />
+                <ListDisplay
+                    filteredLists={filteredLists}
+                    handleListButtonClick={handleListButtonClick}
+                    listImages={listImages}
+                />
             </Box>
         </Box>
     );

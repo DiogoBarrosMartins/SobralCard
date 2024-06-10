@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import CardListDisplay from '../../components/CardListDisplay';
 import Header from '../../components/Header';
 

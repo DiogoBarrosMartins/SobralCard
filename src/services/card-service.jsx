@@ -21,10 +21,12 @@ export async function getCardsByString(searchInput) {
             name: element.name,
             id: element.id,
             card: element.image_uris
-                ? element.image_uris.normal
-                : element.card_faces[0].image_uris.normal,
+                ? element.image_uris.large
+                : element.card_faces[0].image_uris.large,
             mana_cost: element.mana_cost,
-            prices: element.prices.eur
+            prices: element.prices.eur,
+            art: element.image_uris  ? element.image_uris.art_crop
+            : element.card_faces[0].image_uris.large
         }));
 
         console.log("Processed cards:", processedCards);
@@ -37,12 +39,13 @@ export async function getCardsByString(searchInput) {
 }
 
 export async function fetchRandomCardImage() {
-    const searchString = "archive"; // Replace with a string that fetches a random card
+    const searchString = "archive"; 
     const cards = await getCardsByString(searchString);
     return cards[Math.floor(Math.random() * cards.length)];
 }
 export async function fetchCardImage() {
-    const searchString = "archive"; // Replace with a string that fetches a random card
+    const searchString = "archive"; 
     const cards = await getCardsByString(searchString);
     return cards[0];
 }
+
