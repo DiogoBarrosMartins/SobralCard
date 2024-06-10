@@ -139,7 +139,7 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Lists
+             My Lists
             </Typography>
             {lists.map((list, index) => (
               <Item

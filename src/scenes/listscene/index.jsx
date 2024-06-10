@@ -95,7 +95,7 @@ const ListScene = () => {
 
     return (
         <Box m="20px">
-            <Header   title={`List: ${listName}`} subtitle={`Cards in your list : ${cards.length}`} variant="h4" mb="20px" />
+            <Header title={`List: ${listName}`} subtitle={`Cards in your list : ${cards.length}`} variant="h4" mb="20px" />
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -103,10 +103,17 @@ const ListScene = () => {
                 gap: '20px',
                 marginBottom: '20px',
             }}>
-              
-                <Button variant="contained" color="primary" onClick={handleAddCard}>Add New Card</Button>
-                <Button variant="contained" color="primary" onClick={handleDeleteAllCards}>Delete All Cards</Button>
-                <Button variant="contained" color="primary" onClick={handleGoBack}>Go Back to List Menu</Button>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    marginBottom: '20px',
+                }}>
+                    <Button variant="contained" color="primary" onClick={handleAddCard}>Add New Card</Button>
+                    <Button variant="contained" color="primary" onClick={handleDeleteAllCards}>Delete All Cards</Button>
+                    <Button variant="contained" color="primary" onClick={handleGoBack}>Go Back to List Menu</Button>
+                </Box>
                 <Box sx={{
                     display: 'flex',
                     flexWrap: 'wrap',
