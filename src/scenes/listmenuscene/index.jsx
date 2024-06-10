@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography, MenuItem, Select } from '@mui/material';
+import { Box, Button, Typography, MenuItem, Select, TextField } from '@mui/material';
 import Header from "../../components/Header";
-import { fetchRandomCardImage, getCardsByString } from "../../services/card-service"; // Import getCardsByString
+import { fetchRandomCardImage, getCardsByString } from "../../services/card-service";
 import { useNavigate } from 'react-router-dom';
 
 const ListMenuScene = () => {
@@ -9,7 +9,8 @@ const ListMenuScene = () => {
     const [randomCardImage, setRandomCardImage] = useState('');
     const [selectedListToDelete, setSelectedListToDelete] = useState('');
     const [listImages, setListImages] = useState({});
-    const navigate = useNavigate(); // Initialize the navigate function
+    const [searchInput, setSearchInput] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedListsString = localStorage.getItem('storedLists');
@@ -22,7 +23,7 @@ const ListMenuScene = () => {
         const fetchImage = async () => {
             try {
                 const card = await fetchRandomCardImage();
-                console.log("Card fetched:", card); // Add console log
+                console.log("Card fetched:", card); 
                 setRandomCardImage(card.card);
             } catch (error) {
                 console.error("Error fetching card:", error);
@@ -35,16 +36,18 @@ const ListMenuScene = () => {
         const fetchListImages = async () => {
             const images = {};
             for (const list of storedLists) {
-                try {
-                    const card = await getCardsByString(list.name);
-                    if (card.length > 0) {
-                        images[list.name] = card[0].card;
-                    } else {
-                        images[list.name] = 'https://via.placeholder.com/150'; // Fallback image
+                if (list && list.name) {
+                    try {
+                        const card = await getCardsByString(list.name);
+                        if (card.length > 0) {
+                            images[list.name] = card[0].card;
+                        } else {
+                            images[list.name] = 'https://via.placeholder.com/150';
+                        }
+                    } catch (error) {
+                        console.error(`Error fetching image for list ${list.name}:`, error);
+                        images[list.name] = 'https://via.placeholder.com/150';
                     }
-                } catch (error) {
-                    console.error(`Error fetching image for list ${list.name}:`, error);
-                    images[list.name] = 'https://via.placeholder.com/150'; // Fallback image
                 }
             }
             setListImages(images);
@@ -96,10 +99,17 @@ const ListMenuScene = () => {
         if (listName) {
             navigate(`/list?name=${encodeURIComponent(listName)}`);
         } else {
-            // Handle the case when no list is selected
             console.log("No list selected.");
         }
     };
+
+    const handleSearchInputChange = (e) => {
+        setSearchInput(e.target.value);
+    };
+
+    const filteredLists = storedLists.filter(list => 
+        list && list.name && list.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
 
     return (
         <Box m="20px" display="flex" flexDirection="column" height="84vh">
@@ -127,6 +137,7 @@ const ListMenuScene = () => {
                 <Button variant="contained" color="secondary" size="small" onClick={handleDeleteList} sx={{ ml: 2 }}>
                     Delete List
                 </Button>
+               
             </Box>
             <Box flex="1" display="flex" flexDirection="row" justifyContent="center">
                 <Box mx="10px" flex="1" display="flex" alignItems="stretch">
@@ -141,8 +152,8 @@ const ListMenuScene = () => {
                         <Box
                             style={{
                                 backgroundImage: `url(${randomCardImage})`,
-                                backgroundSize: 'cover', // Use cover for better image fitting
-                                backgroundPosition: 'center',
+                                backgroundSize: `${100 + (storedLists.length * 100)}%`,
+                                backgroundPosition: '55% 20%',
                                 width: '100%',
                                 height: '90%',
                                 position: 'absolute',
@@ -168,7 +179,7 @@ const ListMenuScene = () => {
                         </Typography>
                     </Button>
                 </Box>
-                {storedLists.map((list, index) => (
+                {filteredLists.map((list, index) => (
                     <Box key={index} mx="10px" flex="1" height="80vh">
                         <Button
                             variant="contained"
@@ -178,8 +189,10 @@ const ListMenuScene = () => {
                             sx={{ height: "90%", minHeight: "64px" }}
                             style={{ 
                                 backgroundImage: `url(${listImages[list.name] || 'https://via.placeholder.com/150'})`,
-                                backgroundPosition: 'center',
-                                backgroundSize: 'cover',
+                                
+                                backgroundSize: `${100 + (storedLists.length * 100)}%`,
+                                backgroundPosition: '55% 20%',
+                                
                             }}
                         >
                             <Typography

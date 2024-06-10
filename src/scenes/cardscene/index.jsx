@@ -42,6 +42,7 @@ const CardScene = () => {
                 setCard(fetchedCard);
             } else {
                 setError("No card found");
+                console.log(error);
             }
         } catch (error) {
             setError(error.message);
@@ -72,7 +73,7 @@ const CardScene = () => {
                   <Typography>Go back</Typography> 
                 </Button>
             </Box>
-            {error && <div>Error: {error}</div>}
+        
             {card && (
                 <Box height="80%" marginLeft={"20px"}>
                     <Card card={card} />
