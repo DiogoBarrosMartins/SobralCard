@@ -13,19 +13,17 @@ const CardListPage = () => {
 
     const handleCardClick = useCallback((card) => {
         setSelectedCard(card);
-       
-            navigate(`/card?name=${encodeURIComponent(card.name)}`);
-
+        navigate(`/card?name=${encodeURIComponent(card.name)}&list=${encodeURIComponent(searchInput)}`);
     }, [navigate, searchInput]);
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const cardName = params.get('name');
         if (cardName) {
-            setSearchInput(cardName);
-            handleCardClick({ name: cardName });
+            setSearchInput(params.get('list') || 'shop');  // Set the search input based on the list parameter
+            setSelectedCard({ name: cardName });
         }
-    }, [location.search, handleCardClick]);
+    }, [location.search]);
 
     const handleSearchChange = (e) => {
         setSearchInput(e.target.value);
