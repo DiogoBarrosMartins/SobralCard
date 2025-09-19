@@ -1,3 +1,4 @@
+// App.jsx
 import { useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ColorModeContext, useMode } from "./theme";
@@ -17,9 +18,7 @@ function App() {
   const updateSidebarRef = useRef(null);
 
   const updateSidebar = () => {
-    if (updateSidebarRef.current) {
-      updateSidebarRef.current();
-    }
+    if (updateSidebarRef.current) updateSidebarRef.current();
   };
 
   return (
@@ -27,14 +26,30 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {isSidebar && <Sidebar storedLists={storedLists} updateSidebarRef={updateSidebarRef} />}
+          {isSidebar && (
+            <Sidebar
+              storedLists={storedLists}
+              updateSidebarRef={updateSidebarRef}
+            />
+          )}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<CardListPage />} />
               <Route path="/card" element={<CardScene />} />
-              <Route path="/deck" element={<ListMenuScene storedLists={storedLists} setStoredLists={setStoredLists} updateSidebar={updateSidebar} />} />
+              <Route
+                path="/deck"
+                element={
+                  <ListMenuScene
+                    storedLists={storedLists}
+                    setStoredLists={setStoredLists}
+                    updateSidebar={updateSidebar}
+                  />
+                }
+              />
               <Route path="/list" element={<CardSearchScene />} />
+
+              <Route path="/list/card" element={<ListCardDetailScene />} />
               <Route path="/list/card/:name" element={<ListCardDetailScene />} />
             </Routes>
           </main>
